@@ -62,10 +62,11 @@ pipeline {
         sh '''
           $DOCKER run --rm \
             -v "$PWD":/app -w /app \
-            node:20-alpine sh -lc "npm test"
+            node:20-alpine sh -lc "CI=true npm test"
         '''
       }
     }
+
 
     stage('Build Docker Image') {
       steps {
