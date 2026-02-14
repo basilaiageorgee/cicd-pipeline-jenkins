@@ -48,8 +48,8 @@ EOF
         sh '''
           $DOCKER rm -f "$CONTAINER" || true
           $DOCKER run -d --name "$CONTAINER" -p "$PORT":3000 "$IMAGE"
-          echo "✅ Manual deploy '${params.BRANCH}' -> http://localhost:$PORT"
         '''
+        echo "✅ Manual deploy '${params.BRANCH}' -> http://localhost:${params.BRANCH == 'main' ? '3000' : '3001'}"
       }
     }
   }
