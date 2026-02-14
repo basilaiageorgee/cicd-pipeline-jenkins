@@ -19,7 +19,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: params.BRANCH, url: 'https://github.com/basilaiageorgee/cicd-pipeline-jenkins.git'
+        // Replace with your repo URL (HTTPS or SSH)
+        git branch: params.BRANCH, url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
       }
     }
 
