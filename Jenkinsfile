@@ -39,10 +39,23 @@ pipeline {
         sh '''
           $DOCKER run --rm \
             -v "$PWD":/app -w /app \
-            node:20-alpine sh -lc "node -v && npm -v && npm ci && npm run build"
+            node:20-alpine sh -lc '
+              node -v && npm -v
+    
+              if [ -f package-lock.json ]; then
+                echo "✅ Found package-lock.json -> npm ci"
+                npm ci
+              else
+                echo "⚠️ No package-lock.json -> npm install"
+                npm install
+              fi
+    
+              npm run build
+            '
         '''
       }
     }
+
 
     stage('Test') {
       steps {
