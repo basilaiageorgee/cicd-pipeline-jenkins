@@ -1,6 +1,3 @@
-// Jenkinsfile.cd — Regular Pipeline "CD_deploy_manual" (manual deploy)
-// Manually choose branch (main/dev) and deploy to correct port.
-
 pipeline {
   agent any
 
@@ -22,8 +19,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Replace with your repo URL (HTTPS or SSH)
-        git branch: params.BRANCH, url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
+        git branch: params.BRANCH, url: 'https://github.com/basilaiageorgee/cicd-pipeline-jenkins.git'
       }
     }
 
