@@ -1,3 +1,4 @@
+
 pipeline {
   agent any
 
@@ -17,19 +18,23 @@ pipeline {
     stage('Build') {
       steps {
         sh '''
-          node -v
-          npm -v
-          npm ci
-          npm run build
+          docker run --rm \
+            -v "$PWD":/app -w /app \
+            node:20-alpine sh -lc "node -v && npm -v && npm ci && npm run build"
+        '''
+      }
+    }
+    
+    stage('Test') {
+      steps {
+        sh '''
+          docker run --rm \
+            -v "$PWD":/app -w /app \
+            node:20-alpine sh -lc "npm test"
         '''
       }
     }
 
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
-    }
 
     stage('Build Docker Image') {
       steps {
