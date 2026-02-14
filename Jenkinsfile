@@ -2,6 +2,7 @@ pipeline {
   agent any
 
   environment {
+    PATH   = "/Applications/Docker.app/Contents/Resources/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
     DOCKER    = "/Applications/Docker.app/Contents/Resources/bin/docker"
 
     APP_NAME  = "cicd-app"
